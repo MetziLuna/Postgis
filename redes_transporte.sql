@@ -9,10 +9,12 @@ SELECT pgr_CreateTopology('redvial_turin', 0.001, 'geom','id');
 -- AGREGA LONGITUD DE TRAMO Y COSTO
 
 ALTER TABLE redvial_turin ADD column length double precision;
+-- Se coloca la longitud del tramo en Kilómetros y para esto se divide entre 1000
 
 UPDATE redvial_turin SET length = st_length(geom)/1000;
 
 ALTER TABLE redvial_turin ADD column cost double precision;
+-- Se coloca el costo en segundos
 
 UPDATE redvial_turin SET cost = length/50*3600;
 
